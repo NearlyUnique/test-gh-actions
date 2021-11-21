@@ -27,8 +27,11 @@ jobs:
     - name: Build
       run: go build .
     - name: Uncommit
+      if: failure()
       run: |
-        cd "${GITHUB_WORKSPACE}"
+        echo "${GITHUB_WORKSPACE} : ${GITHUB_REF}"
+        cd ${GITHUB_WORKSPACE}
+        git status
         git branch ${GITHUB_REF}
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
