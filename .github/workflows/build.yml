@@ -1,4 +1,4 @@
-nane: Build
+name: Build
 
 on:
   push:
