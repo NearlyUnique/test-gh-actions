@@ -23,3 +23,4 @@ jobs:
         gh auth login --with-token <<<"$TEMP_TOKEN"
         ver=$(gh release view --json tagName|jq .tagName -r|awk -F. '{print $3}')
         echo "Deploy v0.0.$ver"
+        echo code.txt
