@@ -25,6 +25,7 @@ jobs:
         go version
         go vet .
         go test ./... -v
+        gh version
         env
     - name: Build
       run: go build .
