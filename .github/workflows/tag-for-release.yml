@@ -2,23 +2,18 @@ name: Tag for release
 
 on:
   workflow_dispatch:
-    inputs:
-      run:
-        description: Press run
-        default: main
-        requiored: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
-    - name: Setup
-      uses: actions/setup-go@v2
-    - name: Checks
+    # - name: Checkout
+    #   uses: actions/checkout@v2
+    #   with:
+    #     fetch-depth: 2
+    # - name: Setup
+    #   uses: actions/setup-go@v2
+    - name: Create release tag
       env:
         TEMP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
