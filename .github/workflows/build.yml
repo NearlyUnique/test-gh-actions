@@ -33,6 +33,7 @@ jobs:
         ver=$(($(gh release view --json tagName|jq .tagName -r|awk -F. '{print $3}')+1))
         echo "Next version ($ver)"
         echo "-----------"
+        gh release create "v0.0.$ver" --generate-notes
         #env
     # - name: Build
     #   run: go build .
