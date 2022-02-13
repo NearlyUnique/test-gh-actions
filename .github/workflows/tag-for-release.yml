@@ -2,6 +2,11 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+      run:
+        description: Press run
+        default: main
+        requiored: false
 
 jobs:
   build:
