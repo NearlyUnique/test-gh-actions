@@ -5,6 +5,10 @@ on:
     types: [published,deleted]
     tags:
       - 'v*'
+  workflow_run:
+    workflows: ["Tag for release"]
+    types:
+      - completed
 
 jobs:
   build:
