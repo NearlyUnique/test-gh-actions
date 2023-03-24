@@ -17,7 +17,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Build Version
+      - name: Diagnostics Headlines
+        run: |
+          echo "github.action              = ${{ github.event }}"
+          echo "github.ref                 = ${{ github.ref }}"
+          echo "github.ref_name            = ${{ github.ref_name }}"
+          echo "github.ref_protected       = ${{ github.ref_protected }}"
+          echo "github.ref_type            = ${{ github.ref_type }}"
+          cat ${{ github.event_path }}
+
+      - name: Diagnostics All
         run: |
           echo "github.action              = ${{ github.action }}"
           echo "github.action_path         = ${{ github.action_path }}"

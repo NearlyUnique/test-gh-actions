@@ -22,9 +22,14 @@ jobs:
       env:
         TEMP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        echo "### START"
         gh auth login --with-token <<<"$TEMP_TOKEN"
+        echo "### POST gh AUTH"
         ver=$(gh release view --json tagName|jq .tagName -r|awk -F. '{print $3}')
+        echo "### POST gh release"
         echo "Deploy v0.0.$ver"
         git log -n5
+        echo "### POST git log"
         git checkout "v0.0.$ver"
+        echo "### POST git checkout"
         cat code.txt
