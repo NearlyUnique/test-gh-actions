@@ -27,7 +27,8 @@ jobs:
 
 
       - name: Do env vars persist between steps
-        env: XV=${{ steps.build-version.outputs.BUILD_VERSION }}
+        env:
+          XV: ${{ steps.build-version.outputs.BUILD_VERSION }}
         run: |
           echo "### BUILD_VERION ${{ steps.build-version.outputs.BUILD_VERSION }} ###"
           echo "#@ $XV @#"
