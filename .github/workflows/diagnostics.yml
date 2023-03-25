@@ -20,13 +20,10 @@ jobs:
         env:
           PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
-          BUILD_VERSION=${{ github.ref }}
-          echo "github.ref_name            = ${{ github.ref_name }}"
-          echo "github.ref_protected       = ${{ github.ref_protected }}"
-          echo "github.ref_type            = ${{ github.ref_type }}"
-          echo "github.event.release.prerelease = $${{ github.event.release.prerelease }}"
           echo "PRERELEASE                 = $PRERELEASE"
           echo "GITHUB_REF_NAME            = $GITHUB_REF_NAME"
+          pwd
+          ls
           TEST_BUILD=$(./build/build_version.sh) $PRERELEASE ${{ github.ref }}
           echo "@@@ $TEST_BUILD @@@"
           echo $TEST_BUILD>test_build.env
