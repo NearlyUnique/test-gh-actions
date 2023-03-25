@@ -1,9 +1,6 @@
 name: Diagnostics
 
 on:
-  create:
-    branches:
-      - release/**
   release:
     types: [published, prereleased]
   push:
@@ -17,6 +14,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Version Env Var
+      - env:
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          BUILD_VERSION=${{ github.ref }}
+          echo "github.ref_name            = ${{ github.ref_name }}"
+          echo "github.ref_protected       = ${{ github.ref_protected }}"
+          echo "github.ref_type            = ${{ github.ref_type }}"
+          echo "github.event.release.prerelease = $${{ github.event.release.prerelease }}"
+          echo "PRERELEASE                 = $PRERELEASE"
+          TEST_BUILD=$(./build_version.sh) $PRERELEASE ${{ github.ref }}
+          echo "@@@ $TEST_BUILD @@@"
+          echo $TEST_BUILD>test_build.env
+          cat ${{ github.event_path }}
+
+      - name: Do env vars persist between steps
+        run: |
+          echo "### $TEST_BUILD ###"
+          echo "cat $(cat ./test_build.env)""
+
       - name: Diagnostics Headlines
         run: |
           echo "github.action              = ${{ github.event }}"
@@ -24,6 +41,7 @@ jobs:
           echo "github.ref_name            = ${{ github.ref_name }}"
           echo "github.ref_protected       = ${{ github.ref_protected }}"
           echo "github.ref_type            = ${{ github.ref_type }}"
+          echo "github.event.release.prerelease = $${{ github.event.release.prerelease }}"
           cat ${{ github.event_path }}
 
       - name: Diagnostics All
