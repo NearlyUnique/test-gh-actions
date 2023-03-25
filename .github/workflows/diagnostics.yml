@@ -26,7 +26,8 @@ jobs:
           echo "github.ref_type            = ${{ github.ref_type }}"
           echo "github.event.release.prerelease = $${{ github.event.release.prerelease }}"
           echo "PRERELEASE                 = $PRERELEASE"
-          TEST_BUILD=$(../build/build_version.sh) $PRERELEASE ${{ github.ref }}
+          echo "GITHUB_REF_NAME            = $GITHUB_REF_NAME"
+          TEST_BUILD=$(./build/build_version.sh) $PRERELEASE ${{ github.ref }}
           echo "@@@ $TEST_BUILD @@@"
           echo $TEST_BUILD>test_build.env
           cat ${{ github.event_path }}
