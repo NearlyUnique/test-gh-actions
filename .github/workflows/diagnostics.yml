@@ -24,10 +24,7 @@ jobs:
           echo "PRERELEASE                 = $PRERELEASE"
           echo "GITHUB_REF_NAME            = $GITHUB_REF_NAME"
           stat ./build/build_version.sh
-          echo "EXECUTE ..."
-          ./build/build_version.sh $GITHUB_REF_NAME $PRERELEASE
-          echo "... DONE"
-          TEST_BUILD=$(./build/build_version.sh) $GITHUB_REF_NAME $PRERELEASE
+          TEST_BUILD=$(./build/build_version.sh $GITHUB_REF_NAME $PRERELEASE)
           echo "@@@ $TEST_BUILD @@@"
           echo $TEST_BUILD>test_build.env
           cat ${{ github.event_path }}
