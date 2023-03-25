@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Version Env Var
-      - env:
+        env:
           PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
           BUILD_VERSION=${{ github.ref }}
